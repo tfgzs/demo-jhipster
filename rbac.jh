@@ -1,0 +1,53 @@
+//权限相关的表
+entity User {
+	name String 
+    mobile String 
+    email String 
+    password String required
+    nickName String 
+    headImage String
+    userType Integer required
+    activated Boolean required
+    deleted Boolean 
+    createTime OffsetDateTime
+    modifyTime OffsetDateTime
+}
+entity Role {
+	code String required
+	name String required
+    deleted Boolean 
+    createTime OffsetDateTime
+    modifyTime OffsetDateTime
+}
+
+entity Resource {
+	name String required
+    parentId Integer
+    sortnum Integer
+    uri String
+    icon String
+    type String
+    deleted Boolean 
+    createTime OffsetDateTime
+    modifyTime OffsetDateTime
+}
+
+entity Social {
+	bindType Integer required
+    opendId String required
+    deleted Boolean 
+    createTime OffsetDateTime
+    modifyTime OffsetDateTime
+}
+
+relationship ManyToMany {
+	User{roles} to Role
+} 
+
+relationship ManyToMany {
+	Role{resources} to Resource
+}
+
+relationship ManyToOne {
+	Social{user} to User 
+}
